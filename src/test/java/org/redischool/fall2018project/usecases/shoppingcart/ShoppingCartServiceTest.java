@@ -26,4 +26,15 @@ class ShoppingCartServiceTest {
 
         assertEquals(List.of(new ShoppingCart.Item(product, quantity)), result.items());
     }
+
+    @Test
+    void cartShouldConsolidateItemsWithTheSameProduct() {
+        Product product = new Product();
+
+        subject.addToCurrentShoppingCart(product, 1);
+        subject.addToCurrentShoppingCart(product, 2);
+        ShoppingCart result = subject.getCurrentShoppingCart();
+
+        assertEquals(List.of(new ShoppingCart.Item(product, 3)), result.items());
+    }
 }

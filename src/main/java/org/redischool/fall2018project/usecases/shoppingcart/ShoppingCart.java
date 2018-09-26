@@ -19,6 +19,11 @@ public class ShoppingCart {
         items.add(item);
     }
 
+    public void addToItem(int quantity) {
+        Item item = items.get(0);
+        items.set(0, new Item(item.product, item.quantity + quantity));
+    }
+
     static class Item {
         private final Product product;
         private final int quantity;

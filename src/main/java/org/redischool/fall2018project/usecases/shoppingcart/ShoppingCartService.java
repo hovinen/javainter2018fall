@@ -8,6 +8,10 @@ public final class ShoppingCartService {
     }
 
     public void addToCurrentShoppingCart(Product product, int quantity) {
-        shoppingCart.addItem(new ShoppingCart.Item(product, quantity));
+        if (shoppingCart.items().isEmpty()) {
+            shoppingCart.addItem(new ShoppingCart.Item(product, quantity));
+        } else {
+            shoppingCart.addToItem(quantity);
+        }
     }
 }
