@@ -7,7 +7,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShoppingCartServiceTest {
-    private final ShoppingCartService subject = new ShoppingCartService();
+    private final ShoppingCartRepository shoppingCartRepository = new FakeShoppingCartRepository();
+    private final ShoppingCartService subject = new ShoppingCartService(shoppingCartRepository);
 
     @Test
     void cartShouldBeInitiallyEmpty() {
@@ -48,5 +49,15 @@ class ShoppingCartServiceTest {
         ShoppingCart result = subject.getCurrentShoppingCart();
 
         assertEquals(List.of(new ShoppingCart.Item(product1, 1), new ShoppingCart.Item(product2, 1)), result.items());
+    }
+
+    @Test
+    void serviceShouldRetrieveShoppingCartFromRepository() {
+        Product product = new Product("Product");
+        shoppingCartRepository.persistShoppingCart(new ShoppingCart().add(product, 1));
+
+        ShoppingCart result = subject.getCurrentShoppingCart();
+
+        assertEquals(List.of(new ShoppingCart.Item(product, 1)), result.items());
     }
 }

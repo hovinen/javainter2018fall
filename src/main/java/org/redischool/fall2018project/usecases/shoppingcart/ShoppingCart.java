@@ -16,13 +16,14 @@ public class ShoppingCart {
         return ImmutableList.copyOf(items.values());
     }
 
-    void add(Product product, int quantity) {
+    ShoppingCart add(Product product, int quantity) {
         if (!items.containsKey(product)) {
             items.put(product, new Item(product, quantity));
         } else {
             Item existingItem = items.get(product);
             items.put(product, existingItem.plus(quantity));
         }
+        return this;
     }
 
     static class Item {
