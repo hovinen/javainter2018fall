@@ -16,15 +16,12 @@ public class ShoppingCart {
         return ImmutableList.copyOf(items.values());
     }
 
-    public void addItem(Item item) {
-        items.put(item.product, item);
-    }
-
     void add(Product product, int quantity) {
         if (!items.containsKey(product)) {
-            addItem(new Item(product, quantity));
+            items.put(product, new Item(product, quantity));
         } else {
-            items.put(product, new Item(product, items.get(product).quantity + quantity));
+            Item existingItem = items.get(product);
+            items.put(product, existingItem.plus(quantity));
         }
     }
 
@@ -50,6 +47,10 @@ public class ShoppingCart {
         @Override
         public String toString() {
             return toStringHelper(this).add("product", product).add("quantity", quantity).toString();
+        }
+
+        private Item plus(int quantity) {
+            return new Item(product, this.quantity + quantity);
         }
     }
 }
