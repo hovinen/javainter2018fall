@@ -1,27 +1,31 @@
 package org.redischool.fall2018project.usecases.shoppingcart;
 
-import com.google.common.base.MoreObjects;
+import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.MoreObjects.toStringHelper;
 
 public class ShoppingCart {
-    private final List<Item> items = new ArrayList<>();
+    private final Map<Product, Item> items = new LinkedHashMap<>();
 
     public List<Item> items() {
-        return items;
+        return ImmutableList.copyOf(items.values());
     }
 
     public void addItem(Item item) {
-        items.add(item);
+        items.put(item.product, item);
     }
 
-    public void addToItem(int quantity) {
-        Item item = items.get(0);
-        items.set(0, new Item(item.product, item.quantity + quantity));
+    void add(Product product, int quantity) {
+        if (!items.containsKey(product)) {
+            addItem(new Item(product, quantity));
+        } else {
+            items.put(product, new Item(product, items.get(product).quantity + quantity));
+        }
     }
 
     static class Item {

@@ -18,7 +18,7 @@ class ShoppingCartServiceTest {
 
     @Test
     void cartShouldIncludeOneAddedItem() {
-        Product product = new Product();
+        Product product = new Product("Product");
         int quantity = 3;
 
         subject.addToCurrentShoppingCart(product, quantity);
@@ -29,12 +29,24 @@ class ShoppingCartServiceTest {
 
     @Test
     void cartShouldConsolidateItemsWithTheSameProduct() {
-        Product product = new Product();
+        Product product = new Product("Product");
 
         subject.addToCurrentShoppingCart(product, 1);
         subject.addToCurrentShoppingCart(product, 2);
         ShoppingCart result = subject.getCurrentShoppingCart();
 
         assertEquals(List.of(new ShoppingCart.Item(product, 3)), result.items());
+    }
+
+    @Test
+    void cartShouldAllowAddingTwoDifferentProducts() {
+        Product product1 = new Product("Apple");
+        Product product2 = new Product("Orange");
+
+        subject.addToCurrentShoppingCart(product1, 1);
+        subject.addToCurrentShoppingCart(product2, 1);
+        ShoppingCart result = subject.getCurrentShoppingCart();
+
+        assertEquals(List.of(new ShoppingCart.Item(product1, 1), new ShoppingCart.Item(product2, 1)), result.items());
     }
 }
