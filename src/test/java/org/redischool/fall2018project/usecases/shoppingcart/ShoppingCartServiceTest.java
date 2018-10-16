@@ -19,7 +19,7 @@ class ShoppingCartServiceTest {
 
     @Test
     void cartShouldIncludeOneAddedItem() {
-        Product product = new Product("Product");
+        Product product = new Product("Product", 10.0);
         int quantity = 3;
 
         subject.addToCurrentShoppingCart(product, quantity);
@@ -30,7 +30,7 @@ class ShoppingCartServiceTest {
 
     @Test
     void cartShouldConsolidateItemsWithTheSameProduct() {
-        Product product = new Product("Product");
+        Product product = new Product("Product", 10.0);
 
         subject.addToCurrentShoppingCart(product, 1);
         subject.addToCurrentShoppingCart(product, 2);
@@ -41,8 +41,8 @@ class ShoppingCartServiceTest {
 
     @Test
     void cartShouldAllowAddingTwoDifferentProducts() {
-        Product product1 = new Product("Apple");
-        Product product2 = new Product("Orange");
+        Product product1 = new Product("Apple", 10.0);
+        Product product2 = new Product("Orange", 10.0);
 
         subject.addToCurrentShoppingCart(product1, 1);
         subject.addToCurrentShoppingCart(product2, 1);
@@ -53,11 +53,26 @@ class ShoppingCartServiceTest {
 
     @Test
     void serviceShouldRetrieveShoppingCartFromRepository() {
-        Product product = new Product("Product");
+        Product product = new Product("Product", 10.0);
         shoppingCartRepository.persistShoppingCart(new ShoppingCart().add(product, 1));
 
         ShoppingCart result = subject.getCurrentShoppingCart();
 
         assertEquals(List.of(new ShoppingCart.Item(product, 1)), result.items());
+    }
+    @Test
+    void serviceShouldComputeTotalOfEmptyCartAsZero(){
+        ShoppingCart result = subject.getCurrentShoppingCart();
+        assertEquals(0.0, result.total());
+    }
+
+    @Test
+    void serviceShouldComputeTotalOfCartWithOneItem(){
+        Product product = new Product("Product", 10.0);
+        subject.addToCurrentShoppingCart(product,1);
+        ShoppingCart result = subject.getCurrentShoppingCart();
+
+        assertEquals(10.0, result.total());
+
     }
 }

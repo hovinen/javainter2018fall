@@ -26,6 +26,16 @@ public class ShoppingCart {
         return this;
     }
 
+    public double total() {
+        if(items.isEmpty()){
+            return 0;
+
+        }
+        else{
+            return items().get(0).product.getprice();
+        }
+    }
+
     static class Item {
         private final Product product;
         private final int quantity;
