@@ -75,4 +75,19 @@ class ShoppingCartServiceTest {
         assertEquals(10.0, result.total());
 
     }
-}
+
+    @Test
+        void serviceShouldComputeTotalPrice(){
+        Product product1 = new Product("apple", 10.00);
+        subject.addToCurrentShoppingCart(product1, 3);
+        Product product2 = new Product ( "banana", 15.00);
+        subject.addToCurrentShoppingCart(product2,2);
+
+        ShoppingCart result = subject.getCurrentShoppingCart();
+
+        assertEquals(54.00, result.total());
+
+
+    }
+
+    }
