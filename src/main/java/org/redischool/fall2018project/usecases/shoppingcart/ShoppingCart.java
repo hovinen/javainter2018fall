@@ -27,13 +27,11 @@ public class ShoppingCart {
     }
 
     public double total() {
-        if(items.isEmpty()){
-            return 0;
-
-        }
-        else{
-            return items().get(0).product.getprice();
-        }
+        double totalprice = 0;
+       for(Item item: items()){
+           totalprice += item.product.getprice();
+       }
+           return totalprice;
     }
 
     static class Item {
