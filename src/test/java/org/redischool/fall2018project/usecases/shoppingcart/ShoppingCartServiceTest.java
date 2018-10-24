@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+//import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShoppingCartServiceTest {
@@ -85,9 +86,17 @@ class ShoppingCartServiceTest {
 
         ShoppingCart result = subject.getCurrentShoppingCart();
 
-        assertEquals(54.00, result.total());
+        assertEquals(50.00, result.total());
+    }
 
+    @Test
+    void serviceShouldComputeTotalPriceWithDiscount(){
+        Product product1 = new Product("apple", 10.00);
+        subject.addToCurrentShoppingCart(product1, 9);
 
+        ShoppingCart result = subject.getCurrentShoppingCart();
+
+        assertEquals(80.00, result.total());
     }
 
     }

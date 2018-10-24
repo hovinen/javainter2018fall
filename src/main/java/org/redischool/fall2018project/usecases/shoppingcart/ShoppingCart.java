@@ -29,15 +29,16 @@ public class ShoppingCart {
     public double total() {
         double totalPrice = 0;
         int totalQuantity = 0;
-        for ( Item item: items()){
-            totalQuantity+= item.quantity;
+        for (Item item : items()) {
+            totalQuantity += item.quantity;
 
-            totalPrice+= item.product.getprice()*item.quantity;
+            if (item.quantity >= 3) {
+                totalPrice += item.product.getprice() * (item.quantity - 1);
+            } else {
+                totalPrice += item.product.getprice() * item.quantity;
+            }
 
 
-
-        }if( totalQuantity>= 5){
-            totalPrice= totalPrice*0.9;
         }
 
 
