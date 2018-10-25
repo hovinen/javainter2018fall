@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+//import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShoppingCartServiceTest {
@@ -77,6 +78,7 @@ class ShoppingCartServiceTest {
     }
 
     @Test
+<<<<<<< HEAD
     void serviceShouldComputeTotalOfCartWith2Items(){
         Product product1 = new Product("Apple",15.7);
         Product product2 = new Product ("banana", 10.00);
@@ -91,3 +93,27 @@ class ShoppingCartServiceTest {
 
 
 }
+=======
+        void serviceShouldComputeTotalPrice(){
+        Product product1 = new Product("apple", 10.00);
+        subject.addToCurrentShoppingCart(product1, 3);
+        Product product2 = new Product ( "banana", 15.00);
+        subject.addToCurrentShoppingCart(product2,2);
+
+        ShoppingCart result = subject.getCurrentShoppingCart();
+
+        assertEquals(50.00, result.total());
+    }
+
+    @Test
+    void serviceShouldComputeTotalPriceWithDiscount(){
+        Product product1 = new Product("apple", 10.00);
+        subject.addToCurrentShoppingCart(product1, 9);
+
+        ShoppingCart result = subject.getCurrentShoppingCart();
+
+        assertEquals(80.00, result.total());
+    }
+
+    }
+>>>>>>> 13ed8cbdc4fa40f252a117425b320e11a685e2fc

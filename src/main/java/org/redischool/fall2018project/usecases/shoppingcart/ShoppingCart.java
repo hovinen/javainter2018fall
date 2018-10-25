@@ -27,11 +27,31 @@ public class ShoppingCart {
     }
 
     public double total() {
+<<<<<<< HEAD
         double totalprice = 0;
        for(Item item: items()){
            totalprice += item.product.getprice();
        }
            return totalprice;
+=======
+        double totalPrice = 0;
+        int totalQuantity = 0;
+        for (Item item : items()) {
+            totalQuantity += item.quantity;
+
+            if (item.quantity >= 3) {
+                totalPrice += item.product.getprice() * (item.quantity - 1);
+            } else {
+                totalPrice += item.product.getprice() * item.quantity;
+            }
+
+
+        }
+
+
+        return totalPrice;
+
+>>>>>>> 13ed8cbdc4fa40f252a117425b320e11a685e2fc
     }
 
     static class Item {
