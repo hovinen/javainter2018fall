@@ -16,4 +16,5 @@ public final class ShoppingCartService {
         shoppingCart.add(product, quantity);
         shoppingCartRepository.persistShoppingCart(shoppingCart);
     }
+
 }
