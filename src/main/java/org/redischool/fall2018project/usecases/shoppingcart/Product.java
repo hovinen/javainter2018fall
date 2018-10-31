@@ -21,4 +21,8 @@ public class Product {
     public double getprice() {
         return price;
     }
+
+    public ProductDto toProductDto(){
+        return new ProductDto(name, price);
+    }
 }

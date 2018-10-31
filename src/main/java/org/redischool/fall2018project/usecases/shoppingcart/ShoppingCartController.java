@@ -16,10 +16,19 @@ public final class ShoppingCartController {
     }
 
     @RequestMapping("/shoppingcart/product")
-    public String addProductToCart(@RequestParam String name,
+    public ProductDto addProductToCart(@RequestParam String name,
                                    @RequestParam double price,
                                    @RequestParam(value = "quantity", defaultValue = "1") int quantity) {
-        shoppingCartService.addToCurrentShoppingCart(new Product(name, price), quantity);
-        return shoppingCartService.getCurrentShoppingCart().items().toString();
+        Product product = new Product(name, price);
+
+        shoppingCartService.addToCurrentShoppingCart(product, quantity);
+
+        return product.toProductDto();
     }
+
+    @RequestMapping("/shoppingcart/")
+    public String getShoppingCart(){
+        return String.valueOf(shoppingCartService.getCurrentShoppingCart());
+    }
+
 }

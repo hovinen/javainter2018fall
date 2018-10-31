@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,15 +36,34 @@ class ShoppingCartControllerTest {
     }
 
     @Test
-    void testAddAProductToTheShoppingCart() {
+    void testOneAProductToTheShoppingCart() {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/shoppingcart/product?name=Banana&price=10.0",
-                String.class)).contains("{product=Product{name=Banana}, quantity=1}");
+                ProductDto.class)).isEqualToComparingFieldByField(new Product("Banana", 10.0));
     }
 
     @Test
     void testAddTwoProductsToTheShoppingCart() {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port +
+
+
+        ResponseEntity<String> forEntity = this.restTemplate.getForEntity("http://localhost:" + port +
                         "shoppingcart/product?name=Banana&quantity=2&price=10.0",
-                String.class)).contains("{product=Product{name=Banana}, quantity=2}");
+                String.class);
+        assertThat(forEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        System.out.println(forEntity.getBody());
+
+        ProductDto object = this.restTemplate.getForObject("http://localhost:" + port +
+                        "shoppingcart/product?name=Banana&quantity=2&price=10.0",
+                ProductDto.class);
+        assertThat(object).isEqualToComparingFieldByField(new Product("Banana", 10.0));
+    }
+    @Test
+    void testShouldToHasAEmptyShoppingCart(){
+        ResponseEntity<String> forEntity = this.restTemplate.getForEntity("http://localhost:" + port +
+                        "shoppingcart/",
+                String.class);
+        assertThat(forEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        System.out.println(forEntity.getBody());
+
+
     }
 }
