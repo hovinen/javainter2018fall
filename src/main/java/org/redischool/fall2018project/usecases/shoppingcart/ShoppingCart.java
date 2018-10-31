@@ -29,7 +29,7 @@ public class ShoppingCart {
     public double total() {
         double totalprice = 0;
        for(Item item: items()){
-           totalprice += item.product.getprice();
+           totalprice += item.product.getPrice();
        }
            return totalprice;
     }

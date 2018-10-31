@@ -9,8 +9,6 @@ public class Product {
     public Product(String name, double price) {
         this.name = name;
         this.price = price;
-
-
     }
 
     @Override
@@ -18,7 +16,7 @@ public class Product {
         return toStringHelper(this).add("name", name).toString();
     }
 
-    public double getprice() {
+    public double getPrice() {
         return price;
     }
 
