@@ -14,7 +14,7 @@ class ShoppingCartServiceTest {
     void cartShouldBeInitiallyEmpty() {
         ShoppingCart result = subject.getCurrentShoppingCart();
 
-        assertEquals(List.of(), result.items());
+        assertEquals(List.of(), result.getItems());
     }
 
     @Test
@@ -25,7 +25,7 @@ class ShoppingCartServiceTest {
         subject.addToCurrentShoppingCart(product, quantity);
         ShoppingCart result = subject.getCurrentShoppingCart();
 
-        assertEquals(List.of(new ShoppingCart.Item(product, quantity)), result.items());
+        assertEquals(List.of(new ShoppingCart.Item(product, quantity)), result.getItems());
     }
 
     @Test
@@ -36,7 +36,7 @@ class ShoppingCartServiceTest {
         subject.addToCurrentShoppingCart(product, 2);
         ShoppingCart result = subject.getCurrentShoppingCart();
 
-        assertEquals(List.of(new ShoppingCart.Item(product, 3)), result.items());
+        assertEquals(List.of(new ShoppingCart.Item(product, 3)), result.getItems());
     }
 
     @Test
@@ -48,7 +48,7 @@ class ShoppingCartServiceTest {
         subject.addToCurrentShoppingCart(product2, 1);
         ShoppingCart result = subject.getCurrentShoppingCart();
 
-        assertEquals(List.of(new ShoppingCart.Item(product1, 1), new ShoppingCart.Item(product2, 1)), result.items());
+        assertEquals(List.of(new ShoppingCart.Item(product1, 1), new ShoppingCart.Item(product2, 1)), result.getItems());
     }
 
     @Test
@@ -58,7 +58,7 @@ class ShoppingCartServiceTest {
 
         ShoppingCart result = subject.getCurrentShoppingCart();
 
-        assertEquals(List.of(new ShoppingCart.Item(product, 1)), result.items());
+        assertEquals(List.of(new ShoppingCart.Item(product, 1)), result.getItems());
     }
     @Test
     void serviceShouldComputeTotalOfEmptyCartAsZero(){
