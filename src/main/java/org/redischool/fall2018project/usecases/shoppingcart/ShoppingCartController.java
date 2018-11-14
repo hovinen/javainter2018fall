@@ -1,8 +1,6 @@
 package org.redischool.fall2018project.usecases.shoppingcart;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public final class ShoppingCartController {
@@ -15,20 +13,18 @@ public final class ShoppingCartController {
         return String.valueOf(shoppingCartService.getCurrentShoppingCart().total());
     }
 
-    @RequestMapping("/shoppingcart/product")
-    public ProductDto addProductToCart(@RequestParam String name,
-                                   @RequestParam double price,
-                                   @RequestParam(value = "quantity", defaultValue = "1") int quantity) {
-        Product product = new Product(name, price);
+    @RequestMapping(path = "/shoppingcart/product", method = RequestMethod.POST)
+    public ShoppingCartDto addProductToCart(@RequestBody ItemDto itemDto) {
+        Product product = new Product(itemDto.getName(), itemDto.getPrice());
 
-        shoppingCartService.addToCurrentShoppingCart(product, quantity);
+        shoppingCartService.addToCurrentShoppingCart(product, itemDto.getQuantity());
 
-        return product.toProductDto();
+        return ShoppingCartDto.of(shoppingCartService.getCurrentShoppingCart());
     }
 
     @RequestMapping("/shoppingcart/")
-    public String getShoppingCart(){
-        return String.valueOf(shoppingCartService.getCurrentShoppingCart());
+    public ShoppingCartDto getShoppingCart() {
+        return ShoppingCartDto.of(shoppingCartService.getCurrentShoppingCart());
     }
 
 }
