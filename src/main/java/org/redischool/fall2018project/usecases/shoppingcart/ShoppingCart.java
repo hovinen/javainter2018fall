@@ -31,11 +31,37 @@ public class ShoppingCart {
     }
 
     public double total() {
-        double totalprice = 0;
+        double totalPrice = 0;
        for(Item item: getItems()){
-           totalprice += item.product.getPrice();
+           totalPrice += item.product.getPrice() * item.getQuantity();
        }
-           return totalprice;
+           return totalPrice;
+    }
+
+    public void deleteItem(Product product) {
+        items.remove(product);
+    }
+
+    public void clear() {
+        items.clear();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShoppingCart that = (ShoppingCart) o;
+        return Objects.equals(items, that.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(items);
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper(this).add("items", this.getItems()).toString();
     }
 
     static class Item {
