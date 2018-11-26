@@ -16,7 +16,7 @@ public class ShoppingCart {
         return ImmutableList.copyOf(items.values());
     }
 
-    ShoppingCart(){
+    ShoppingCart() {
 
     }
 
@@ -31,22 +31,16 @@ public class ShoppingCart {
     }
 
     public double total() {
-<<<<<<< HEAD
-        double totalprice = 0;
-       for(Item item: getItems()){
-           totalprice += item.product.getPrice();
-       }
-           return totalprice;
-=======
+
         double totalPrice = 0;
         int totalQuantity = 0;
-        for (Item item : items()) {
+        for (Item item : getItems()) {
             totalQuantity += item.quantity;
 
             if (item.quantity >= 3) {
-                totalPrice += item.product.getprice() * (item.quantity - 1);
+                totalPrice += item.product.getPrice() * (item.quantity - 1);
             } else {
-                totalPrice += item.product.getprice() * item.quantity;
+                totalPrice += item.product.getPrice() * item.quantity;
             }
 
 
@@ -55,7 +49,6 @@ public class ShoppingCart {
 
         return totalPrice;
 
->>>>>>> 13ed8cbdc4fa40f252a117425b320e11a685e2fc
     }
 
     static class Item {

@@ -17,16 +17,7 @@ public class FoundationPickerServiceTest {
     }
 
     @Test
-    void lightFoundationForLightSkin() {
-
-        Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Light, SkinConsistency.DRY);
-        Foundation expectedFoundation = Foundation.LightDry;
-        assertEquals(expectedFoundation, actualFoundation);
-
-    }
-
-    @Test
-    void darkFoundationForDarkSkin() {
+    void darkFoundationForDarkDrySkin() {
         Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Dark, SkinConsistency.DRY);
         Foundation expectedFoundation = Foundation.DarkDry;
         assertEquals(expectedFoundation, actualFoundation);
@@ -34,14 +25,66 @@ public class FoundationPickerServiceTest {
     }
 
     @Test
-    void mediumFoundationForMediumSkin() {
+    void darkFoundationForDarkOilySkin() {
+        Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Dark, SkinConsistency.OILY);
+        Foundation expectedFoundation = Foundation.DarkOily;
+        assertEquals(expectedFoundation, actualFoundation);
+
+    }
+
+    @Test
+    void darkFoundationForDarkNormalSkin() {
+        Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Dark, SkinConsistency.NORMAL);
+        Foundation expectedFoundation = Foundation.DarkNormal;
+        assertEquals(expectedFoundation, actualFoundation);
+
+    }
+
+    @Test
+    void lightFoundationForLightOilySkin() {
+        Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Light, SkinConsistency.OILY);
+        Foundation expectedFoundation = Foundation.LightOily;
+        assertEquals(expectedFoundation, actualFoundation);
+
+    }
+
+    @Test
+    void lightFoundationForLightNormalSkin() {
+        Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Light, SkinConsistency.NORMAL);
+        Foundation expectedFoundation = Foundation.LightNormal;
+        assertEquals(expectedFoundation, actualFoundation);
+    }
+
+    @Test
+    void lightFoundationForLightDrySkin() {
+        Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Light, SkinConsistency.DRY);
+        Foundation expectedFoundation = Foundation.LightDry;
+        assertEquals(expectedFoundation, actualFoundation);
+    }
+
+    @Test
+    void mediumFoundationForMediumDrySkin() {
         Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Medium, SkinConsistency.DRY);
         Foundation expectedFoundation = Foundation.MediumDry;
         assertEquals(expectedFoundation, actualFoundation);
     }
-   // @Test
+
+    @Test
+    void mediumFoundationForMediumOilySkin() {
+        Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Medium, SkinConsistency.OILY);
+        Foundation expectedFoundation = Foundation.MediumOily;
+        assertEquals(expectedFoundation, actualFoundation);
+    }
+
+    @Test
+    void mediumFoundationForMediumNormalSkin() {
+        Foundation actualFoundation = subject.tellMeTheRightFoundationForMySkinType(TypeOfSkin.Medium, SkinConsistency.NORMAL);
+        Foundation expectedFoundation = Foundation.MediumNormal;
+        assertEquals(expectedFoundation, actualFoundation);
+    }
+    // @Test
     // void oilyFoundationForOilySkin(){
-     //   Foundation actualyFoundation = subject.tellMeTheRightFoundationForMySkinType(SkinConsistency.OILY)
-   // }
+    //   Foundation actualyFoundation = subject.tellMeTheRightFoundationForMySkinType(SkinConsistency.OILY)
+    // }
 }
 
