@@ -17,4 +17,9 @@ public class FakeShoppingCartRepository implements ShoppingCartRepository {
     public ShoppingCart fetchShoppingCart(String user) {
         return null;
     }
+
+    @Override
+    public void persistShoppingCart(String user, ShoppingCart shoppingCart) {
+
+    }
 }
