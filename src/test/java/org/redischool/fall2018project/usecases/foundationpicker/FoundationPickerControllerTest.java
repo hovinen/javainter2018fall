@@ -18,6 +18,7 @@ public class FoundationPickerControllerTest {
 
 
     @LocalServerPort
+
     private int port;
 
     @Autowired
